@@ -1,0 +1,17 @@
+export const industryOptions = [
+  { label: 'Finance', value: 'finance' },
+  { label: 'Healthcare', value: 'healthcare' },
+  { label: 'Technology', value: 'technology' },
+  { label: 'Education', value: 'education' },
+  { label: 'Retail', value: 'retail' },
+  { label: 'Manufacturing', value: 'manufacturing' },
+  { label: 'Real Estate', value: 'real_estate' },
+  { label: 'Transportation', value: 'transportation' },
+  { label: 'Hospitality', value: 'hospitality' },
+  { label: 'Energy', value: 'energy' },
+  { label: 'Agriculture', value: 'agriculture' },
+  { label: 'Construction', value: 'construction' },
+  { label: 'Entertainment', value: 'entertainment' },
+  { label: 'Telecommunications', value: 'telecommunications' },
+  { label: 'Others', value: 'others' },
+];
