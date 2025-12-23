@@ -17,14 +17,21 @@ export default function DateFilterItem({
       fontSize=".8rem"
       cursor="pointer"
       h="2rem"
-      px=".6rem"
-      rounded="4px"
-      fontWeight={isActive ? 500 : 400}
-      border={isActive ? '1px solid #11406F' : '1px solid #DDDDDD'}
-      color={isActive ? '#11406F' : '#828282'}
+      px=".8rem"
+      rounded="999px"
+      fontWeight={isActive ? 600 : 500}
+      border={isActive ? '1px solid #1B4F8F' : '1px solid #E2E8F0'}
+      color={isActive ? '#1B4F8F' : '#667085'}
+      bg={isActive ? '#E9F1FF' : 'white'}
+      boxShadow={isActive ? '0 6px 16px rgba(27, 79, 143, 0.18)' : 'none'}
       onClick={onClick}
       lineHeight="20px"
       fontFamily={'heading'}
+      transition="all 0.2s ease"
+      _hover={{
+        borderColor: '#1B4F8F',
+        color: '#1B4F8F',
+      }}
     >
       {item}
     </Center>

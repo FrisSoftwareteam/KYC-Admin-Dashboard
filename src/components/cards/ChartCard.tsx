@@ -8,10 +8,12 @@ export default function ChartCard({
   chart = 'bar',
   name,
   value,
+  changePercent,
 }: {
   chart?: 'line' | 'bar';
   name: string;
   value: any;
+  changePercent?: number | null;
 }) {
   const monthlyData = [45, 80, 20, 160, 50, 140, 80, 70, 10, 40, 100, 50];
 
@@ -34,10 +36,11 @@ export default function ChartCard({
       {
         label: '',
         data: monthlyData,
-        backgroundColor: '#6FB3F9',
+        backgroundColor: '#9DC4FA',
         borderWidth: 0,
         barThickness: 11,
         borderSkipped: 'middle',
+        borderRadius: 6,
       },
     ],
   };
@@ -94,7 +97,7 @@ export default function ChartCard({
         label: '',
         data: monthlyData,
         fill: false,
-        borderColor: '#213F6B',
+        borderColor: '#1B4F8F',
         tension: 0.4,
         borderWidth: 3,
         pointRadius: 0,
@@ -132,6 +135,16 @@ export default function ChartCard({
       display: false,
     },
   };
+  const isChangeNumber =
+    typeof changePercent === 'number' && Number.isFinite(changePercent);
+  const formattedChange = isChangeNumber
+    ? `${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(1)}%`
+    : '—';
+  const changeColor = !isChangeNumber
+    ? '#6B7280'
+    : changePercent >= 0
+    ? '#16A34A'
+    : '#DC2626';
 
   return (
     <Box
@@ -139,14 +152,15 @@ export default function ChartCard({
       px={'1.8rem'}
       pb={'1.5rem'}
       bg={'white'}
-      rounded={'.5rem'}
-      border="1.55px solid #F9F9F9"
+      rounded={'0.9rem'}
+      border="1px solid #EEF0F4"
+      boxShadow={'0 8px 20px rgba(17, 64, 111, 0.08)'}
     >
       <Text
         fontSize={'.8rem'}
         textTransform={'uppercase'}
-        color={'#828282'}
-        fontWeight={500}
+        color={'#6B7280'}
+        fontWeight={600}
       >
         {name}
       </Text>
@@ -154,11 +168,11 @@ export default function ChartCard({
       <SimpleGrid mt={'1rem'} h={'7rem'} bg={'yfllow'} columns={3}>
         <GridItem>
           <Stack h={'100%'} justifyContent={'space-between'}>
-            <Text color={'#4F4F4F'} fontWeight={700} fontSize={'1.5rem'}>
+            <Text color={'#111827'} fontWeight={700} fontSize={'1.6rem'}>
               {value}
             </Text>
-            <Text fontSize={'1.3rem'} color={'#FF3366'}>
-              +3.3%
+            <Text fontSize={'1rem'} color={changeColor} fontWeight={600}>
+              {formattedChange}
             </Text>
           </Stack>
         </GridItem>

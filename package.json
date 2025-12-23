@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host --port 3000 --strictPort",
+    "dev": "vite --host --port 3001 --strictPort",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
     "build": "tsc && vite build",
     "lint": "eslint --fix --ext ts,tsx ./src --report-unused-disable-directives --max-warnings 0",
