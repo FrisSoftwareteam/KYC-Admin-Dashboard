@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
 import { useLoginHook } from '../hooks/useLogin';
+import { useGoogleSignIn } from '../hooks/useGoogleSignIn';
 import { Link } from 'react-router-dom';
 export function Login() {
   const {
@@ -24,6 +25,7 @@ export function Login() {
     handleFormSubmit,
     isLoading,
   } = useLoginHook();
+  const { signInWithGoogle, isGoogleLoading } = useGoogleSignIn();
   return (
     <Center
       rounded={'6px'}
@@ -46,6 +48,12 @@ export function Login() {
           Welcome back
         </Text>
         <Center
+          as="button"
+          type="button"
+          onClick={signInWithGoogle}
+          disabled={isGoogleLoading}
+          opacity={isGoogleLoading ? 0.6 : 1}
+          _hover={{ bg: '#F7F7F7' }}
           rounded={'4px'}
           py={'.5rem'}
           gap={'1rem'}
@@ -55,7 +63,7 @@ export function Login() {
         >
           <FcGoogle fontSize={'1.2rem'} />
           <Text color={'#4F4F4F'} fontWeight={500}>
-            Login with Google
+            {isGoogleLoading ? 'Signing in…' : 'Login with Google'}
           </Text>
         </Center>
 
