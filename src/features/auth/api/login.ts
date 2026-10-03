@@ -55,3 +55,38 @@ export const useLoginUserApi = (config?: MutationConfig<MutationFnType>) => {
     ...config,
   });
 };
+
+export const googleLoginUser = async (accessToken: string) => {
+  const response = await axios.post<ApiResponse<LoginResponse>>(
+    '/auth/admin-google-login',
+    { accessToken }
+  );
+  return response.data;
+};
+
+type GoogleMutationFnType = typeof googleLoginUser;
+
+export const useGoogleLoginUserApi = (
+  config?: MutationConfig<GoogleMutationFnType>
+) => {
+  const toast = useToast();
+  const setUser = useSetRecoilState(UserState);
+
+  const navigate = useNavigate();
+  return useMutation({
+    onError: (err: any) => {
+      toast({ status: 'error', description: getErrorMessage(err) });
+    },
+    async onSuccess({ data }) {
+      setAccessToken(data.jwt.accessToken);
+      setRefreshToken(data.jwt.refreshToken);
+      setUser({ ...data.user });
+      navigate('/');
+    },
+
+    retry: false,
+    mutationKey: ['googleLoginUser'],
+    mutationFn: googleLoginUser,
+    ...config,
+  });
+};

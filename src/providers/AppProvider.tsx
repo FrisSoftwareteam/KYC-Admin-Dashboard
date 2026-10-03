@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { ThemeProvider } from './theme-provider';
 import { RecoilRoot } from 'recoil';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { HelmetProvider } from 'react-helmet-async';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -19,7 +20,15 @@ export function AppProvider({ children }: AppProviderProps) {
             position="right"
             buttonPosition="bottom-right"
           /> */}
-          <RecoilRoot>{children}</RecoilRoot>
+          <RecoilRoot>
+            <GoogleOAuthProvider
+              clientId={
+                import.meta.env.VITE_APP_GOOGLE_CLIENT_ID || 'not-configured'
+              }
+            >
+              {children}
+            </GoogleOAuthProvider>
+          </RecoilRoot>
         </QueryClientProvider>
       </ThemeProvider>
     </HelmetProvider>
